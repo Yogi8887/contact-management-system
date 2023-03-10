@@ -1,0 +1,19 @@
+pipeline{
+   agent any
+
+   environment{
+      PATH = "/opt/maven3/bin:$PATH"
+   }
+   stages{
+       stage("Git checkout"){
+           steps{
+               git branch: 'main', credentialsId: 'github', url: 'https://github.com/Yogi8887/contact-management-system.git'
+           }
+       }
+       stage("Maven Build"){
+          steps{
+             sh "mvn clean package"
+          }
+       }
+   }
+}
